@@ -8,7 +8,7 @@ class CreateMaintenanceProductsTable extends Migration
 {
     public function up()
     {
-        Schema::create('maintenance__products', function (Blueprint $table) {
+        Schema::create('maintenance_products', function (Blueprint $table) {
             $table->id();
             $table->string('maintenance_videos')->nullable();
             $table->string('maintenance_video_title_1')->nullable();

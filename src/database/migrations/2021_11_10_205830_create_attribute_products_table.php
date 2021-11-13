@@ -36,12 +36,12 @@ class CreateAttributeProductsTable extends Migration
             $table->string('visibility')->nullable();
             $table->string('clearance')->nullable();
             $table->string('max_temperature')->nullable();
-            $table->string('description')->nullable();
-            $table->string('short_description')->nullable();
-            $table->string('tech_spec_1')->nullable();
-            $table->string('tech_spec_2')->nullable();
-            $table->string('tech_spec_3')->nullable();
-            $table->string('product_videos')->nullable();
+            $table->text('description')->nullable();
+            $table->text('short_description')->nullable();
+            $table->text('tech_spec_1')->nullable();
+            $table->text('tech_spec_2')->nullable();
+            $table->text('tech_spec_3')->nullable();
+            $table->text('product_videos')->nullable();
             $table->string('nozzle_value')->nullable();
             $table->string('foam_value')->nullable();
             $table->string('is_featured')->nullable();
@@ -68,7 +68,7 @@ class CreateAttributeProductsTable extends Migration
             $table->string('poa_price')->nullable();
             $table->string('msrp')->nullable();
             $table->string('meta_title')->nullable();
-            $table->string('meta_keywords')->nullable();
+            $table->text('meta_keywords')->nullable();
             $table->string('meta_description')->nullable();
             $table->string('pdf_title_1')->nullable();
             $table->string('pdf_title_2')->nullable();
@@ -85,7 +85,7 @@ class CreateAttributeProductsTable extends Migration
             $table->timestamps();
 
             $table->foreign('manufacturer_id')->references('id')->on('manufacturer_products');
-            $table->foreign('maintenance_id')->references('id')->on('maintenance__products');
+            $table->foreign('maintenance_id')->references('id')->on('maintenance_products');
             $table->foreign('hose_id')->references('id')->on('hose_products');
         });
     }
