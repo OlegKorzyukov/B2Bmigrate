@@ -32,3 +32,9 @@ docker-compose exec php /bin/bash -c "cd /var/www/html && php artisan parse:file
 Links
 ============================================
 http://127.0.0.1/api/doc - to Swagger
+
+First register user - http://127.0.0.1/api/v1/auth/register
+
+After login - http://127.0.0.1/api/v1/auth/login, take 'access_token' and push into header to all request
+
+Header: Authorization: Bearer 'access_token'
