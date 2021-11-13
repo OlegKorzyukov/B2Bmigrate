@@ -8,6 +8,7 @@ STACK
 INSTALL
 ============================================
 Install docker and docker-compose
+
 Go to folder project
 
 **On Linux:**
