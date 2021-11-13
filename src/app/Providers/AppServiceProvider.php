@@ -16,8 +16,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(ParserFilesService::class, function(){
-            return new ParserFilesService(new ProductImport());
+        $this->app->tag([CategoryImport::class, ProductImport::class], 'imports');
+
+        $this->app->bind(ParserFilesService::class, function($app){
+            $imports = $app->tagged('imports');
+
+            return new ParserFilesService($imports);
         });
     }
 
