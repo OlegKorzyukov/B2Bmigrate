@@ -10,6 +10,9 @@ class AttributeProduct extends Model
     use HasFactory;
 
     protected $fillable = [
+        'manufacturer_id',
+        'maintenance_id',
+        'hose_id',
         'type',
         'sku',
         'opera_sku',
