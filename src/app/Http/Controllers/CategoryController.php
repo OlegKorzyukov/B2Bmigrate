@@ -5,40 +5,42 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
+
 
 class CategoryController extends Controller
 {
-    public function store(array $params): RedirectResponse
+    public function index()
     {
-        Category::create([
-            'name' => $params['supplies_name'],
-            'link' => $params['supplies_link'],
-        ]);
-        return  redirect(route('home'));
+        //TODO: make pagination
+        return Category::all();
     }
 
-    public function destroy(Request $request): RedirectResponse
+    public function store(Request $request): JsonResponse
     {
-        $manufactureId = filter_var($request->input('manufactureId', FILTER_SANITIZE_NUMBER_INT));
-        Category::destroy((int)$manufactureId);
+        //TODO: validation
+       $category = Category::create($request->all());
 
-        return  redirect(route('home'));
+        return new JsonResponse($category);
     }
 
-    public function update(Request $request): JsonResponse
+    public function show(int $id)
     {
-        if (!is_numeric($request->id)) {
-            return response()->json('Not found', 404);
-        }
+         return Category::findOrFail($id);
+    }
 
-        $validated = $request->validate([
-            'name' => 'string|max:255',
-            'link' => 'string'
-        ]);
+    public function update(Request $request, $id): JsonResponse
+    {
+        //TODO: validation
+       Category::findOrFail($id)->update($request->all());
 
-        if (Category::findOrFail($request->id)->update($validated)) {
-            return response()->json('Success', 201);
-        }
+        return new JsonResponse(Category::find($id));
+    }
+
+    public function destroy(int $id)
+    {
+        $destroyCategory = Category::find($id);
+        Category::destroy($id);
+
+        return  new JsonResponse($destroyCategory);
     }
 }
