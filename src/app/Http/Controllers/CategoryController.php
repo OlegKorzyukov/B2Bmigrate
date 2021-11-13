@@ -8,6 +8,14 @@ use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
 {
+    /**
+     * Get all category
+     *
+     * @Response(
+     *    code: 200
+     *    ref: Category
+     * )
+     */
     public function index(Request $request)
     {
         $limit = (int) $request->get('limit') ?? 10;
@@ -15,6 +23,14 @@ class CategoryController extends Controller
         return Category::paginate($limit);
     }
 
+    /**
+     * Save single category
+     *
+     * @Response(
+     *    code: 200
+     *    ref: Category
+     * )
+     */
     public function store(Request $request): JsonResponse
     {
         //TODO: validation
@@ -23,11 +39,27 @@ class CategoryController extends Controller
         return new JsonResponse($category);
     }
 
+    /**
+     * Show single category
+     *
+     * @Response(
+     *    code: 200
+     *    ref: Category
+     * )
+     */
     public function show(int $id)
     {
          return Category::findOrFail($id);
     }
 
+    /**
+     * Update single category
+     *
+     * @Response(
+     *    code: 200
+     *    ref: Category
+     * )
+     */
     public function update(Request $request, $id): JsonResponse
     {
         //TODO: validation
@@ -36,6 +68,14 @@ class CategoryController extends Controller
         return new JsonResponse(Category::find($id));
     }
 
+    /**
+     * Destroy single category
+     *
+     * @Response(
+     *    code: 200
+     *    ref: Category
+     * )
+     */
     public function destroy(int $id): JsonResponse
     {
         $destroyCategory = Category::find($id);

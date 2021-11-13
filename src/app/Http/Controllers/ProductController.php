@@ -9,6 +9,14 @@ use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
+    /**
+     * Show single product
+     *
+     * @Response(
+     *    code: 200
+     *    ref: Product
+     * )
+     */
     public function index(Request $request): JsonResponse
     {
         $limit = (int)$request->get('limit') ?? 10;
@@ -27,6 +35,14 @@ class ProductController extends Controller
         );
     }
 
+    /**
+     * Save single product
+     *
+     * @Response(
+     *    code: 200
+     *    ref: Product
+     * )
+     */
     public function store(Request $request): JsonResponse
     {
         //TODO: validation
@@ -35,11 +51,27 @@ class ProductController extends Controller
         return new JsonResponse($category);
     }
 
+    /**
+     * Show single product
+     *
+     * @Response(
+     *    code: 200
+     *    ref: Product
+     * )
+     */
     public function show(int $id): JsonResponse
     {
         return new JsonResponse(Product::findOrFail($id));
     }
 
+    /**
+     * Update single product
+     *
+     * @Response(
+     *    code: 200
+     *    ref: Product
+     * )
+     */
     public function update(Request $request, $id): JsonResponse
     {
         //TODO: validation
@@ -48,6 +80,14 @@ class ProductController extends Controller
         return new JsonResponse(Product::find($id));
     }
 
+    /**
+     * Destroy single product
+     *
+     * @Response(
+     *    code: 200
+     *    ref: Product
+     * )
+     */
     public function destroy(int $id): JsonResponse
     {
         $destroyCategory = Product::find($id);
