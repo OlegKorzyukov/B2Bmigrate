@@ -2,47 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\DTO\ProductDTO;
+use App\Models\HoseProduct;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Collection;
 
 class ProductController extends Controller
 {
-    public function store(array $params): RedirectResponse
+    public function index(Request $request)
     {
-        Product::create([
-            'name' => $params['supplies_name'],
-            'substance_id' => $params['supplies_substance'],
-            'manufacturer_id' => $params['supplies_manufacturer'],
-            'price' => $params['supplies_price'],
-        ]);
-        return  redirect(route('home'));
+        $limit = (int)$request->get('limit') ?? 10;
+
+        return new JsonResponse(
+            Product::paginate($limit)->map(
+                    function (Product $product) {
+                        $productDto = new ProductDTO();
+                        $productDto->productId = $product->id;
+                        $productDto->attributes = $product->attributeProduct()->get();
+                        $productDto->categories = $product->category()->get();
+
+                        return $productDto;
+                    }
+                )
+        );
     }
 
-    public function destroy(Request $request): RedirectResponse
+    public function store(Request $request): JsonResponse
     {
-        $medicineId = filter_var($request->input('medicineId', FILTER_SANITIZE_NUMBER_INT));
-        Product::destroy((int)$medicineId);
+        //TODO: validation
+        $category = Product::create($request->all());
 
-        return  redirect(route('home'));
+        return new JsonResponse($category);
     }
 
-    public function update(Request $request): JsonResponse
+    public function show(int $id)
     {
-        if (!is_numeric($request->id)) {
-            return response()->json('Not found', 404);
-        }
+        return new JsonResponse(Product::findOrFail($id));
+    }
 
-        $validated = $request->validate([
-            'name' => 'string|max:255',
-            'substance_id' => 'numeric|exists:substances,id',
-            'manufacturer_id' => 'numeric|exists:manufacturers,id',
-            'price' => 'numeric',
-        ]);
+    public function update(Request $request, $id): JsonResponse
+    {
+        //TODO: validation
+        Product::findOrFail($id)->update($request->all());
 
-        if (Product::findOrFail($request->id)->update($validated)) {
-            return response()->json('Success', 201);
-        }
+        return new JsonResponse(Product::find($id));
+    }
+
+    public function destroy(int $id)
+    {
+        $destroyCategory = Product::find($id);
+        Product::destroy($id);
+
+        return  new JsonResponse($destroyCategory);
     }
 }

@@ -9,10 +9,11 @@ use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        //TODO: make pagination
-        return Category::all();
+        $limit = (int) $request->get('limit') ?? 10;
+
+        return Category::paginate($limit);
     }
 
     public function store(Request $request): JsonResponse
