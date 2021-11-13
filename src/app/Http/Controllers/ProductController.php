@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\DTO\ProductDTO;
-use App\Models\HoseProduct;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Collection;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         $limit = (int)$request->get('limit') ?? 10;
 
@@ -37,7 +35,7 @@ class ProductController extends Controller
         return new JsonResponse($category);
     }
 
-    public function show(int $id)
+    public function show(int $id): JsonResponse
     {
         return new JsonResponse(Product::findOrFail($id));
     }
@@ -50,7 +48,7 @@ class ProductController extends Controller
         return new JsonResponse(Product::find($id));
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): JsonResponse
     {
         $destroyCategory = Product::find($id);
         Product::destroy($id);

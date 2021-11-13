@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -22,10 +23,8 @@ class AuthController extends Controller
 
     /**
      * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $credentials = $request->validate([
             'email' => 'required|email',
@@ -41,12 +40,8 @@ class AuthController extends Controller
 
     /**
      * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    protected function createNewToken($token)
+    protected function createNewToken(string $token): JsonResponse
     {
         return response()->json([
             'access_token' => $token,
@@ -58,7 +53,7 @@ class AuthController extends Controller
     /**
      * User registration
      */
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
         $validation = $request->validate([
             'name' => 'required|string|between:2,100',
@@ -77,10 +72,8 @@ class AuthController extends Controller
 
     /**
      * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function logout()
+    public function logout(): JsonResponse
     {
         Auth::logout();
         return response()->json(['message' => 'Successfully logged out']);
@@ -88,20 +81,17 @@ class AuthController extends Controller
 
     /**
      * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
+
      */
-    public function refresh()
+    public function refresh(): JsonResponse
     {
         return $this->createNewToken(Auth::refresh());
     }
 
     /**
      * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function user()
+    public function user(): JsonResponse
     {
         return response()->json(auth()->user());
     }

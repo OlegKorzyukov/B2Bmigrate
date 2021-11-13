@@ -6,7 +6,6 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
-
 class CategoryController extends Controller
 {
     public function index(Request $request)
@@ -37,7 +36,7 @@ class CategoryController extends Controller
         return new JsonResponse(Category::find($id));
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): JsonResponse
     {
         $destroyCategory = Category::find($id);
         Category::destroy($id);

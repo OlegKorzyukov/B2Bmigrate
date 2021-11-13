@@ -93,7 +93,6 @@ services:
         volumes:
             - './documentation/:/usr/share/nginx/html/documentation/'
         environment:
-#            https://swagger.io/docs/open-source-tools/swagger-ui/usage/configuration/
             URLS: "[
                 { url: './documentation/v1.yml', name: 'API-v1' },
             ]"

@@ -18,7 +18,7 @@ class ParserFilesService
         return $this->imports;
     }
 
-    public function import()
+    public function import(): void
     {
         foreach ($this->imports as $import) {
             /** @var FilesToImportInterface $import*/
