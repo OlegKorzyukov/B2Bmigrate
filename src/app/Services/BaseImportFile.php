@@ -8,4 +8,14 @@ class BaseImportFile
     {
         return 2;
     }
+
+    public function batchSize(): int
+    {
+        return 500;
+    }
+
+    public function chunkSize(): int
+    {
+        return 500;
+    }
 }

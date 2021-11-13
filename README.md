@@ -25,6 +25,8 @@ docker-compose exec php /bin/bash -c "cd /var/www/html && composer install --no-
 
 docker-compose exec php /bin/bash -c "cd /var/www/html && php artisan migrate:refresh"
 
+**ATTEMPT - long execute**
+
 docker-compose exec php /bin/bash -c "cd /var/www/html && php artisan parse:file"
 
 Links
