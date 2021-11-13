@@ -1,3 +1,5 @@
 *
 !public/
 !.gitignore
+!category.csv
+!product.csv
