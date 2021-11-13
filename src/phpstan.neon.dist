@@ -1,0 +1,10 @@
+parameters:
+    level: 8
+    reportUnmatchedIgnoredErrors: false
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    paths:
+        - app
+        - tests
+    excludePaths:
+        - vendor
