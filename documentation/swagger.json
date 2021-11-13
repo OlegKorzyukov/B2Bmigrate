@@ -49,12 +49,53 @@
                 "deprecated": false,
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                          "application/json": {
+                            "schema": {
+                              "type": "object",
+                              "properties": {
+                                "access_token": {
+                                  "type": "string",
+                                  "example": ""
+                                },
+                                "token_type": {
+                                  "type": "string",
+                                  "example": "bearer"
+                                },
+                                "expires_in": {
+                                  "type": "integer",
+                                  "example": 3600
+                                }
+                              }
+                            }
+                          }
+                        }
                     },
                     "401": {
                         "description": "(Unauthorized) Invalid or missing Access Token"
                     }
                 },
+              "parameters": [
+                {
+                  "name": "email",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "password",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              ],
                 "tags": [
                     "v1"
                 ]
@@ -67,12 +108,66 @@
                 "deprecated": false,
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                          "application/json": {
+                            "schema": {
+                              "type": "object",
+                              "properties": {
+                                "message": {
+                                  "type": "string",
+                                  "example": "User successfully registered"
+                                },
+                                "user": {
+                                      "$ref": "#/components/schemas/User"
+                                }
+                              }
+                            }
+                          }
+                        }
                     },
                     "401": {
                         "description": "(Unauthorized) Invalid or missing Access Token"
                     }
                 },
+              "parameters": [
+                {
+                  "name": "name",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "email",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "password",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "integer"
+                  }
+                },
+                {
+                  "name": "password_confirmation",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
                 "tags": [
                     "v1"
                 ]
@@ -180,6 +275,53 @@
                         "description": "(Unauthorized) Invalid or missing Access Token"
                     }
                 },
+              "parameters": [
+                {
+                  "name": "name",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "url_key",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "description",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "image",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "parent_id",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
                 "security": [
                     {
                         "bearerAuth": []
@@ -249,17 +391,53 @@
                         "description": "(Unauthorized) Invalid or missing Access Token"
                     }
                 },
-                "parameters": [
-                    {
-                        "name": "category",
-                        "in": "path",
-                        "required": true,
-                        "description": "",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
+              "parameters": [
+                {
+                  "name": "name",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "url_key",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "description",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "image",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "parent_id",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
                 "security": [
                     {
                         "bearerAuth": []
@@ -288,17 +466,53 @@
                         "description": "(Unauthorized) Invalid or missing Access Token"
                     }
                 },
-                "parameters": [
-                    {
-                        "name": "category",
-                        "in": "path",
-                        "required": true,
-                        "description": "",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
+              "parameters": [
+                {
+                  "name": "name",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "url_key",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "description",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "image",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "parent_id",
+                  "in": "path",
+                  "required": true,
+                  "description": "",
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              ],
                 "security": [
                     {
                         "bearerAuth": []
